@@ -1,0 +1,30 @@
+{
+  "name": "SGimmicks.Editor",
+  "rootNamespace": "",
+  "references": [
+    "SGimmicks.Runtime",
+    "UdonSharp.Runtime",
+    "UdonSharp.Editor",
+    "VRC.SDKBase",
+    "VRC.SDKBase.Editor",
+    "VRC.SDK3",
+    "VRC.SDK3.Editor",
+    "VRC.Udon",
+    "VRC.Udon.Editor",
+    "Unity.TextMeshPro",
+    "Unity.TextMeshPro.Editor",
+    "Unity.ugui"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
+

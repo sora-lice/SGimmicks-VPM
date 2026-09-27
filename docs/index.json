@@ -1,0 +1,41 @@
+{
+  "name": "SGimmicks VPM Repository",
+  "id": "com.ysasa.sgimmicks.repository",
+  "url": "https://sora-lice.github.io/SGimmicks-VPM/index.json",
+  "author": {
+    "name": "ysasa",
+    "url": "https://github.com/sora-lice"
+  },
+  "packages": {
+    "com.ysasa.sgimmicks": {
+      "versions": {
+        "2.0.0": {
+          "name": "com.ysasa.sgimmicks",
+          "displayName": "SGimmicks",
+          "version": "2.0.0",
+          "unity": "2022.3",
+          "description": "PC向けVRChatワールド用ギミック集。テレポート、VIPスポーン、監視カメラ、部屋番号/RTab、強制テレポート、内線、照明、メッセージボード、キャストタイマーを収録。",
+          "url": "https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.0.0.zip",
+          "vpmDependencies": {
+            "com.vrchat.worlds": "3.10.x"
+          },
+          "author": {
+            "name": "ysasa",
+            "email": "ysasa@users.noreply.github.com",
+            "url": "https://github.com/sora-lice"
+          },
+          "legacyFolders": {
+            "Assets\\SGimmicks": "4266535577e7c06439e201b5910eba59",
+            "Assets\\CastTimerGimmick": "b78e7576d609426409f7786d6e3ecab6"
+          },
+          "legacyFiles": {
+            "Assets\\SerializedUdonPrograms\\240acd391966f3d4c8efcf3aabbbf842.asset": "7922c4f787df3814db6aa440c1f40714",
+            "Assets\\SerializedUdonPrograms\\93050332db0d28a4a82be47a9d88944c.asset": "16cd99473ce622943a22364e2b4abfc8",
+            "Assets\\SerializedUdonPrograms\\dafaae08dca2c044ba4cd26d0cd2c2d3.asset": "c1dc1a81b997a9c449cf14af048e32d0"
+          },
+          "zipSHA256": "9DF15FFC395ABAD428A5842293C6BB22524E46F3191904C1A26D22CC134EBF61"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "SGimmicks.Runtime",
+  "rootNamespace": "",
+  "references": [
+    "UdonSharp.Runtime",
+    "VRC.SDKBase",
+    "VRC.SDK3",
+    "VRC.Udon",
+    "Unity.TextMeshPro",
+    "Unity.ugui"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
+
