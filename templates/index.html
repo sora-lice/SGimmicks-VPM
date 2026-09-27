@@ -3,27 +3,211 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SGimmicks VPM Repository</title>
+  <meta name="theme-color" content="#07111e">
+  <meta name="description" content="VRChatワールド向けギミック集 SGimmicks。VCC・ALCOMからワンクリックで追加できます。">
+  <title>SGimmicks — VRChatワールド向けギミック集</title>
   <style>
-    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-    body { margin: 0; background: #08111d; color: #eef7ff; }
-    main { max-width: 760px; margin: 8vh auto; padding: 32px; }
-    section { padding: 28px; border: 1px solid #24516b; border-radius: 18px; background: #0d1c2b; }
-    h1 { margin-top: 0; }
-    code { display: block; overflow-wrap: anywhere; padding: 14px; border-radius: 10px; background: #050b12; color: #72f0ce; }
-    a { color: #72d8ff; }
+    :root {
+      color-scheme: dark;
+      --bg: #07111e;
+      --panel: rgba(16, 31, 50, .78);
+      --line: rgba(155, 184, 211, .16);
+      --line-strong: rgba(74, 224, 196, .34);
+      --text: #f4f8fc;
+      --muted: #9db0c4;
+      --accent: #4ae0c4;
+      --accent-2: #65a9ff;
+      --warn: #ffd37a;
+      --radius: 22px;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .3);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(1000px 600px at 85% -5%, rgba(61, 126, 224, .18), transparent 60%),
+        radial-gradient(850px 600px at 5% 15%, rgba(25, 196, 168, .12), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, "Noto Sans JP", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
+      line-height: 1.75;
+    }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .skip { position: fixed; left: 12px; top: -60px; z-index: 999; padding: 10px 16px; background: var(--accent); color: #041714; border-radius: 10px; }
+    .skip:focus { top: 12px; }
+    header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--line); background: rgba(7, 17, 30, .82); backdrop-filter: blur(18px); }
+    .nav { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
+    .mark { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 10px; background: linear-gradient(145deg, rgba(74,224,196,.22), rgba(101,169,255,.13)); color: var(--accent); font-size: 14px; }
+    .version { padding: 3px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font: 700 11px/1.4 ui-monospace, monospace; }
+    nav ul { display: flex; list-style: none; gap: 24px; margin: 0; padding: 0; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 700; }
+    nav a:hover { color: var(--text); }
+    .hero { padding: 92px 0 70px; text-align: center; }
+    .eyebrow { margin: 0 0 17px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { max-width: 950px; margin: 0 auto 23px; font-size: clamp(38px, 7vw, 76px); line-height: 1.08; letter-spacing: -.055em; }
+    .gradient { background: linear-gradient(105deg, #fff 25%, var(--accent) 70%, #8ec0ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { max-width: 730px; margin: 0 auto 34px; color: var(--muted); font-size: clamp(16px, 2vw, 19px); }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+    .btn { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 20px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.035); color: var(--text); text-decoration: none; font-weight: 800; cursor: pointer; transition: .18s ease; }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.28); }
+    .btn.primary { border-color: transparent; background: linear-gradient(110deg, var(--accent), #77efd9); color: #031b17; box-shadow: 0 12px 34px rgba(74,224,196,.18); }
+    .btn.secondary { border-color: rgba(101,169,255,.42); background: rgba(101,169,255,.1); }
+    .install-note { margin: 13px auto 0; color: #778ca2; font-size: 12px; }
+    .repo-bar { max-width: 760px; margin: 30px auto 0; display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 16px; border: 1px solid var(--line); border-radius: 14px; background: rgba(0,0,0,.2); text-align: left; }
+    .repo-bar code { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #cfe0f0; font-size: 12px; }
+    .copy { flex: none; border: 0; border-radius: 9px; padding: 9px 13px; background: #172b42; color: var(--text); cursor: pointer; font-weight: 700; }
+    .chips { margin-top: 27px; display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
+    .chip { padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; color: #b7c6d5; background: rgba(255,255,255,.025); font-size: 12px; font-weight: 700; }
+    section { padding: 82px 0; }
+    .section-head { max-width: 720px; margin-bottom: 34px; }
+    .section-head .kicker { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin: 7px 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.2; letter-spacing: -.035em; }
+    .section-head p { margin: 0; color: var(--muted); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step { position: relative; min-height: 190px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+    .step-no { display: inline-grid; place-items: center; width: 34px; height: 34px; margin-bottom: 22px; border-radius: 10px; background: rgba(74,224,196,.12); color: var(--accent); font: 800 13px ui-monospace, monospace; }
+    .step h3 { margin: 0 0 8px; font-size: 18px; }
+    .step p { margin: 0; color: var(--muted); font-size: 14px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .feature { position: relative; overflow: hidden; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(20,39,62,.85), rgba(11,24,40,.8)); }
+    .feature::before { content: ""; position: absolute; width: 110px; height: 110px; right: -45px; top: -45px; border-radius: 50%; background: var(--tone, var(--accent)); opacity: .07; }
+    .feature-top { display: flex; align-items: center; gap: 13px; margin-bottom: 13px; }
+    .feature-icon { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: var(--tone, var(--accent)); font: 800 12px ui-monospace, monospace; }
+    .feature h3 { margin: 0; font-size: 19px; }
+    .feature p { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 4px 8px; border-radius: 7px; background: rgba(255,255,255,.045); color: #b7c7d6; font-size: 11px; font-weight: 700; }
+    details { margin-top: 15px; border-top: 1px solid var(--line); padding-top: 12px; }
+    summary { color: #c7d7e6; cursor: pointer; font-size: 13px; font-weight: 700; }
+    details ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); font-size: 13px; }
+    .compat { display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; }
+    .compat-card { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    .compat-card h3 { margin: 0 0 18px; }
+    .specs { display: grid; gap: 0; margin: 0; }
+    .specs div { display: grid; grid-template-columns: 145px 1fr; gap: 18px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .specs div:last-child { border-bottom: 0; }
+    .specs dt { color: var(--muted); }
+    .specs dd { margin: 0; font-weight: 700; }
+    .notice { margin: 0; padding: 0; list-style: none; display: grid; gap: 13px; }
+    .notice li { position: relative; padding-left: 26px; color: var(--muted); }
+    .notice li::before { content: "!"; position: absolute; left: 0; top: 3px; width: 17px; height: 17px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,211,122,.12); color: var(--warn); font: 800 11px/1 ui-monospace, monospace; }
+    .update { padding: 35px; border: 1px solid var(--line-strong); border-radius: 28px; background: linear-gradient(120deg, rgba(74,224,196,.1), rgba(101,169,255,.08)); display: flex; justify-content: space-between; align-items: center; gap: 28px; }
+    .update h2 { margin-top: 0; }
+    .update p { max-width: 720px; margin: 0; color: var(--muted); }
+    .update .btn { flex: none; }
+    footer { padding: 38px 0 52px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: #bfd0df; text-decoration: none; }
+    .toast { position: fixed; z-index: 100; left: 50%; bottom: 24px; transform: translate(-50%, 20px); padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 10px; background: #102a2a; color: #d9fff7; opacity: 0; pointer-events: none; transition: .2s ease; box-shadow: var(--shadow); font-size: 13px; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-width: 820px) {
+      nav ul { display: none; }
+      .hero { padding-top: 68px; }
+      .steps, .feature-grid, .compat { grid-template-columns: 1fr; }
+      .update { align-items: flex-start; flex-direction: column; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 24px, 1160px); }
+      .brand .version { display: none; }
+      .actions .btn { width: 100%; }
+      .repo-bar { align-items: stretch; flex-direction: column; }
+      .repo-bar code { white-space: normal; overflow-wrap: anywhere; }
+      .copy { width: 100%; }
+      section { padding: 62px 0; }
+      .specs div { grid-template-columns: 1fr; gap: 3px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
   </style>
 </head>
-<body>
-  <main>
+<body data-repository-url="{{REPOSITORY_URL}}">
+  <a class="skip" href="#main">本文へ移動</a>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="SGimmicks トップ"><span class="mark">SG</span><span>SGimmicks</span><span class="version">v{{VERSION}}</span></a>
+      <nav aria-label="メインナビゲーション"><ul><li><a href="#install">導入方法</a></li><li><a href="#gimmicks">ギミック一覧</a></li><li><a href="#requirements">動作環境</a></li><li><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap">
+        <p class="eyebrow">VRChat World Toolkit</p>
+        <h1><span class="gradient">ワールド制作のギミックを、<br>まとめて、更新しやすく。</span></h1>
+        <p class="lead">テレポート、VIPスポーン、監視カメラ、照明、メッセージボードなどを、Unityの「SGimmicks」メニューから作成できるPC向けギミック集です。</p>
+        <div class="actions"><a class="btn primary" href="#" data-add-repository><span>VCCに登録</span><span aria-hidden="true">↗</span></a><a class="btn secondary" href="#" data-add-repository><span>ALCOMに登録</span><span aria-hidden="true">↗</span></a></div>
+        <p class="install-note">どちらも共通のVPM登録リンクを使用します。ブラウザの確認が表示されたら、使用するアプリを開いてください。</p>
+        <div class="repo-bar" aria-label="リポジトリURL"><code id="repository-url">{{REPOSITORY_URL}}</code><button class="copy" type="button" id="copy-url">URLをコピー</button></div>
+        <div class="chips" aria-label="対応情報"><span class="chip">v{{VERSION}}</span><span class="chip">PC / PCVR</span><span class="chip">Unity 2022.3</span><span class="chip">VRCSDK Worlds 3.10.x</span><span class="chip">UdonSharp</span></div>
+      </div>
+    </section>
+    <section id="install">
+      <div class="wrap">
+        <div class="section-head"><span class="kicker">Quick start</span><h2>導入は3ステップ</h2><p>一度リポジトリを登録すれば、次回以降はVCCまたはALCOMから更新できます。</p></div>
+        <div class="steps">
+          <article class="step"><span class="step-no">01</span><h3>リポジトリを登録</h3><p>上のVCC／ALCOM登録ボタンを押します。起動しない場合はURLをコピーして、アプリのリポジトリ追加欄へ貼り付けます。</p></article>
+          <article class="step"><span class="step-no">02</span><h3>プロジェクトへ追加</h3><p>対象のWorldsプロジェクトを開き、パッケージ一覧から「SGimmicks」を追加します。必要なVRCSDK依存関係も確認できます。</p></article>
+          <article class="step"><span class="step-no">03</span><h3>Unityで作成</h3><p>Unity上部メニューの「SGimmicks」から設定ウィンドウを開き、必要なギミックを作成・更新します。</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="gimmicks">
+      <div class="wrap">
+        <div class="section-head"><span class="kicker">Included gimmicks</span><h2>収録ギミック</h2><p>各カードを開くと、同期範囲や操作方法などの補足を確認できます。</p></div>
+        <div class="feature-grid">
+          <article class="feature" style="--tone:#4ae0c4"><div class="feature-top"><span class="feature-icon">TP</span><h3>テレポート</h3></div><p>指定オブジェクトをUseすると、操作したプレイヤー本人を登録地点へ移動します。入口と移動先をHierarchyから設定できます。</p><div class="tags"><span class="tag">ローカル動作</span><span class="tag">位置・向き</span></div><details><summary>詳しい仕様</summary><ul><li>移動先Transformの位置と向きを使用します。</li><li>操作した本人だけが移動します。</li></ul></details></article>
+          <article class="feature" style="--tone:#ffd37a"><div class="feature-top"><span class="feature-icon">VIP</span><h3>VIPスポーン</h3></div><p>登録した表示名のプレイヤーだけをVIP地点へ初期スポーンさせ、その他のプレイヤーは通常スポーンを使用します。</p><div class="tags"><span class="tag">複数名</span><span class="tag">Respawn対応</span></div><details><summary>詳しい仕様</summary><ul><li>VRChatの表示名を完全一致・大文字小文字区別で判定します。</li><li>対象者はRespawn実行時もVIP地点へ移動します。</li></ul></details></article>
+          <article class="feature" style="--tone:#65a9ff"><div class="feature-top"><span class="feature-icon">CAM</span><h3>監視カメラ</h3></div><p>複数カメラを監視室風モニターへ整列表示。パン・チルト・ズーム操作と、指定カメラのローカル拡大表示に対応します。</p><div class="tags"><span class="tag">複数カメラ</span><span class="tag">PTZ操作</span><span class="tag">音声選択</span></div><details><summary>詳しい仕様</summary><ul><li>通常表示は負荷軽減のためカメラを順番に更新し、選択中カメラは優先描画します。</li><li>参加者一覧から選んだ声は距離設定をローカル変更して聞き取りやすくします。生の音声を転送する方式ではありません。</li><li>カメラ追加後は更新処理を実行して、RenderTextureと表示枠を再構成します。</li></ul></details></article>
+          <article class="feature" style="--tone:#a78bfa"><div class="feature-top"><span class="feature-icon">№</span><h3>部屋番号 / RTab</h3></div><p>4桁の部屋番号を入力してEで確定すると対応地点へテレポート。番号によるオブジェクト表示・非表示も設定できます。</p><div class="tags"><span class="tag">4桁入力</span><span class="tag">RTab連携</span><span class="tag">表示同期</span></div><details><summary>詳しい仕様</summary><ul><li>Cで入力を消去し、1台のタブレットを利用者ごとに切り替えて使えます。</li><li>テレポートはローカル、オブジェクトの表示状態はインスタンス全体へ同期します。</li><li>RTab本体は別途導入が必要です。</li></ul></details></article>
+          <article class="feature" style="--tone:#ff8aa5"><div class="feature-top"><span class="feature-icon">FTP</span><h3>強制テレポート</h3></div><p>ワールド内のプレイヤーを複数選択し、1人ずつ別の移動先を割り当てて同時にテレポートできます。</p><div class="tags"><span class="tag">複数選択</span><span class="tag">個別行先</span><span class="tag">ぼかし演出</span></div><details><summary>詳しい仕様</summary><ul><li>共通サーバー時刻を基準に実行命令を同期します。</li><li>移動対象の各クライアントが自分自身を指定地点へ移動します。</li><li>テレポート後の視界を徐々にクリアにする演出を任意で有効化できます。</li></ul></details></article>
+          <article class="feature" style="--tone:#57d18a"><div class="feature-top"><span class="feature-icon">INT</span><h3>PCVR内線</h3></div><p>参加ボタンで内線グループへ入り、右トリガーを素早く2回押した後、押している間だけ全参加者へ通話します。</p><div class="tags"><span class="tag">PCVR専用</span><span class="tag">全参加者通話</span></div><details><summary>詳しい仕様</summary><ul><li>VRChatのプレイヤー音声距離をローカル調整する擬似内線です。</li><li>内線中は周囲向け音声を抑え、参加者同士を距離に関係なく聞き取りやすくします。</li></ul></details></article>
+          <article class="feature" style="--tone:#ffb45c"><div class="feature-top"><span class="feature-icon">LGT</span><h3>館内照明</h3></div><p>スタッフルームの操作盤から、登録したRealtime／Mixedライトを音付きで徐々に暗転・復帰し、状態を全員へ同期します。</p><div class="tags"><span class="tag">グローバル同期</span><span class="tag">フェード</span><span class="tag">効果音</span></div><details><summary>詳しい仕様</summary><ul><li>Bakedライトの焼き込み結果そのものは実行中に変更できません。</li><li>動的に暗くする対象にはRealtimeまたはMixedライトを使用します。</li></ul></details></article>
+          <article class="feature" style="--tone:#f6e066"><div class="feature-top"><span class="feature-icon">CON</span><h3>コンサート照明</h3></div><p>DarknessVolume内を暗くしつつ、天井から演奏者とピアノへ円錐状のスポットライトを当てる演出を作成します。</p><div class="tags"><span class="tag">lilToon</span><span class="tag">PC Built-in</span><span class="tag">範囲暗転</span></div><details><summary>詳しい仕様</summary><ul><li>操作ボードはWorld Space UIで、レーザーポインターから操作できます。</li><li>円錐内のプレイヤーと指定オブジェクトを暗転から除外します。</li><li>対象マテリアルはlilToonのOpaque／Cutoutを想定しています。</li></ul></details></article>
+          <article class="feature" style="--tone:#45d2ee"><div class="feature-top"><span class="feature-icon">TXT</span><h3>メッセージボード</h3></div><p>日本語対応の複数行テキストをプレビューし、確定すると複数の表示画面へ同じ文章・文字サイズ・効果音を反映します。</p><div class="tags"><span class="tag">最大100文字</span><span class="tag">複数表示</span><span class="tag">全員同期</span></div><details><summary>詳しい仕様</summary><ul><li>操作盤・入力欄・確定ボタン・表示パネルを自動生成します。</li><li>TextMeshPro UGUIの表示先を好きな数だけ登録できます。</li><li>最新の文章は後から入室したプレイヤーにも同期されます。</li></ul></details></article>
+          <article class="feature" style="--tone:#f29dff"><div class="feature-top"><span class="feature-icon">TMR</span><h3>キャストタイマー</h3></div><p>キャストが登録すると左手首タイマーを表示でき、スタッフ側から共通タイマーの開始・一時停止・ベル送信を操作できます。</p><div class="tags"><span class="tag">VR手首表示</span><span class="tag">共通タイマー</span><span class="tag">ベル</span></div><details><summary>詳しい仕様</summary><ul><li>左トリガーのダブルタップで手首表示を切り替えます。</li><li>キャスト登録は各プレイヤーのローカル状態のため人数上限がありません。</li><li>00:00時とスタッフ操作時に登録キャストだけへベルを鳴らします。</li></ul></details></article>
+        </div>
+      </div>
+    </section>
+    <section id="requirements">
+      <div class="wrap">
+        <div class="section-head"><span class="kicker">Requirements</span><h2>動作環境と注意点</h2><p>導入前に、対象プロジェクトと競合しないか確認してください。</p></div>
+        <div class="compat">
+          <article class="compat-card"><h3>対応環境</h3><dl class="specs"><div><dt>プラットフォーム</dt><dd>VRChat PC Worlds</dd></div><div><dt>Unity</dt><dd>2022.3.22f1 系</dd></div><div><dt>VRCSDK Worlds</dt><dd>3.10.x（3.10.4確認）</dd></div><div><dt>スクリプト</dt><dd>UdonSharp</dd></div><div><dt>描画</dt><dd>Built-in Render Pipeline</dd></div></dl></article>
+          <article class="compat-card"><h3>導入時の注意</h3><ul class="notice"><li>既存プロジェクトは必ずバックアップしてから追加・更新してください。</li><li>同じSGimmicksをunitypackage版とVPM版で重複導入しないでください。Missing参照や重複コンパイルの原因になります。</li><li>監視カメラは台数と解像度に比例してGPU負荷が増えます。必要な台数・更新頻度に絞ってください。</li><li>公開前にBuild & Testを行い、Udonエラー、同期、権限、表示、音量を複数クライアントで確認してください。</li></ul></article>
+        </div>
+      </div>
+    </section>
     <section>
-      <h1>SGimmicks VPM Repository</h1>
-      <p>現在のパッケージ: v{{VERSION}}</p>
-      <p>VCCの「Settings → Packages → Add Repository」に次のURLを登録してください。</p>
-      <code>{{REPOSITORY_URL}}</code>
-      <p><a href="{{REPOSITORY_URL}}">index.json</a> / <a href="{{PACKAGE_URL}}">パッケージZIP</a></p>
+      <div class="wrap"><div class="update"><div><span class="eyebrow">VPM Update</span><h2>再インポートなしで更新</h2><p>リポジトリを一度登録すると、VCC／ALCOMのパッケージ管理画面から新しいバージョンを確認・適用できます。プロジェクトごとに導入バージョンを管理できます。</p></div><a class="btn primary" href="#" data-add-repository>今すぐ登録する <span aria-hidden="true">↗</span></a></div></div>
     </section>
   </main>
+  <footer><div class="wrap footer-row"><span>SGimmicks v{{VERSION}} — VRChat World Toolkit</span><div class="footer-links"><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a><a href="{{REPOSITORY_URL}}">index.json</a><a href="{{PACKAGE_URL}}">Package ZIP</a></div></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite">リポジトリURLをコピーしました</div>
+  <script>
+    (() => {
+      const repositoryUrl = document.body.dataset.repositoryUrl;
+      const deepLink = `vcc://vpm/addRepo?url=${encodeURIComponent(repositoryUrl)}`;
+      document.querySelectorAll('[data-add-repository]').forEach(link => { link.href = deepLink; });
+      const copyButton = document.getElementById('copy-url');
+      const toast = document.getElementById('toast');
+      let toastTimer;
+      copyButton.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(repositoryUrl); }
+        catch (_) {
+          const area = document.createElement('textarea'); area.value = repositoryUrl; area.style.position = 'fixed'; area.style.opacity = '0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
+        }
+        copyButton.textContent = 'コピー済み'; toast.classList.add('show'); clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => { toast.classList.remove('show'); copyButton.textContent = 'URLをコピー'; }, 1800);
+      });
+    })();
+  </script>
 </body>
 </html>
-

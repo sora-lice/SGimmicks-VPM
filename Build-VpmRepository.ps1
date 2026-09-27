@@ -1,7 +1,8 @@
 param(
     [string]$Version = "2.0.0",
     [string]$GitHubOwner = "YOUR_GITHUB_NAME",
-    [string]$RepositoryName = "SGimmicks-VPM"
+    [string]$RepositoryName = "SGimmicks-VPM",
+    [switch]$SiteOnly
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,6 +16,21 @@ $releaseRoot = Join-Path $docsRoot "packages"
 $templateRoot = Join-Path $repositoryRoot "templates"
 $baseUrl = "https://$GitHubOwner.github.io/$RepositoryName"
 $packageUrl = "$baseUrl/packages/$packageId-$Version.zip"
+
+function Write-RepositorySite {
+    $htmlTemplate = Get-Content -LiteralPath (Join-Path $templateRoot "index.html") -Raw
+    $html = $htmlTemplate.Replace("{{REPOSITORY_URL}}", "$baseUrl/index.json")
+    $html = $html.Replace("{{VERSION}}", $Version)
+    $html = $html.Replace("{{PACKAGE_URL}}", $packageUrl)
+    $html | Set-Content -LiteralPath (Join-Path $docsRoot "index.html") -Encoding UTF8
+    Set-Content -LiteralPath (Join-Path $docsRoot ".nojekyll") -Value "" -Encoding ASCII
+}
+
+if ($SiteOnly) {
+    Write-RepositorySite
+    Write-Host "Repository website: $baseUrl/"
+    exit 0
+}
 
 if (-not (Test-Path -LiteralPath $sourceProject)) {
     throw "SGimmicksPackageProjectが見つかりません: $sourceProject"
@@ -137,12 +153,7 @@ if (-not $repository.packages[$packageId].Contains("versions")) {
 $repository.packages[$packageId].versions[$Version] = $listingManifest
 $repository | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath $indexPath -Encoding UTF8
 
-$htmlTemplate = Get-Content -LiteralPath (Join-Path $templateRoot "index.html") -Raw
-$html = $htmlTemplate.Replace("{{REPOSITORY_URL}}", "$baseUrl/index.json")
-$html = $html.Replace("{{VERSION}}", $Version)
-$html = $html.Replace("{{PACKAGE_URL}}", $packageUrl)
-$html | Set-Content -LiteralPath (Join-Path $docsRoot "index.html") -Encoding UTF8
-Set-Content -LiteralPath (Join-Path $docsRoot ".nojekyll") -Value "" -Encoding ASCII
+Write-RepositorySite
 
 Write-Host "VPM package: $zipPath"
 Write-Host "Repository JSON: $indexPath"
