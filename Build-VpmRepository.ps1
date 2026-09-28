@@ -126,10 +126,8 @@ if (Test-Path -LiteralPath $indexPath) {
         name = "SGimmicks VPM Repository"
         id = "com.ysasa.sgimmicks.repository"
         url = "$baseUrl/index.json"
-        author = [ordered]@{
-            name = "ysasa"
-            url = "https://github.com/$GitHubOwner"
-        }
+        author = "ysasa"
+        description = "PC向けVRChatワールド用ギミック集 SGimmicks のVPMリポジトリ"
         packages = [ordered]@{}
     }
 }
@@ -137,10 +135,8 @@ if (Test-Path -LiteralPath $indexPath) {
 $repository.name = "SGimmicks VPM Repository"
 $repository.id = "com.ysasa.sgimmicks.repository"
 $repository.url = "$baseUrl/index.json"
-$repository.author = [ordered]@{
-    name = "ysasa"
-    url = "https://github.com/$GitHubOwner"
-}
+$repository.author = "ysasa"
+$repository.description = "PC向けVRChatワールド用ギミック集 SGimmicks のVPMリポジトリ"
 if (-not $repository.Contains("packages")) {
     $repository.packages = [ordered]@{}
 }

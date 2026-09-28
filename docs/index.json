@@ -2,10 +2,8 @@
   "name": "SGimmicks VPM Repository",
   "id": "com.ysasa.sgimmicks.repository",
   "url": "https://sora-lice.github.io/SGimmicks-VPM/index.json",
-  "author": {
-    "name": "ysasa",
-    "url": "https://github.com/sora-lice"
-  },
+  "author": "ysasa",
+  "description": "PC向けVRChatワールド用ギミック集 SGimmicks のVPMリポジトリ",
   "packages": {
     "com.ysasa.sgimmicks": {
       "versions": {
