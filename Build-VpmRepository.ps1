@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "2.1.1",
+    [string]$Version = "2.1.2",
     [string]$GitHubOwner = "YOUR_GITHUB_NAME",
     [string]$RepositoryName = "SGimmicks-VPM",
     [switch]$SiteOnly
@@ -73,10 +73,8 @@ foreach ($legacyBuilder in $legacyBuilders) {
     }
 }
 
-Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Runtime.asmdef") -Destination $packageRoot
-Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Runtime.asmdef.meta") -Destination $packageRoot
-Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Editor.asmdef") -Destination (Join-Path $packageRoot "SGimmicks\Editor")
-Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Editor.asmdef.meta") -Destination (Join-Path $packageRoot "SGimmicks\Editor")
+# UdonSharpは通常のasmdef配下をU#アセンブリとして扱わないため、Runtime/Editorとも
+# predefined assembliesへ入れる。独自asmdefを同梱すると全Udonプログラムが無効になる。
 
 $manifest = [ordered]@{
     name = $packageId
