@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "2.1.2",
+    [string]$Version = "2.1.3",
     [string]$GitHubOwner = "YOUR_GITHUB_NAME",
     [string]$RepositoryName = "SGimmicks-VPM",
     [switch]$SiteOnly
@@ -73,8 +73,15 @@ foreach ($legacyBuilder in $legacyBuilders) {
     }
 }
 
-# UdonSharpは通常のasmdef配下をU#アセンブリとして扱わないため、Runtime/Editorとも
-# predefined assembliesへ入れる。独自asmdefを同梱すると全Udonプログラムが無効になる。
+# RuntimeをUdonSharpアセンブリとして明示登録し、Editorは通常のEditor asmdefへ分離する。
+# これによりPackages配下でもUdonSharpBehaviourとEditor拡張の両方を解決できる。
+Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Runtime.asmdef") -Destination $packageRoot
+Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Runtime.asmdef.meta") -Destination $packageRoot
+Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Runtime.asset") -Destination $packageRoot
+Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Runtime.asset.meta") -Destination $packageRoot
+$sgEditorRoot = Join-Path $packageRoot "SGimmicks\Editor"
+Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Editor.asmdef") -Destination $sgEditorRoot
+Copy-Item -LiteralPath (Join-Path $templateRoot "SGimmicks.Editor.asmdef.meta") -Destination $sgEditorRoot
 
 $manifest = [ordered]@{
     name = $packageId
