@@ -10,10 +10,9 @@ SGimmicksとCastTimerを、VRChat Creator Companionから追加・更新でき�
 4. 公開された `https://<ユーザー名>.github.io/<リポジトリ名>/index.json` をVCCへ登録します。
 
 ```powershell
-.\Build-VpmRepository.ps1 -Version 2.0.0 -GitHubOwner <ユーザー名> -RepositoryName SGimmicks-VPM
+.\Build-VpmRepository.ps1 -Version 2.1.0 -GitHubOwner <ユーザー名> -RepositoryName SGimmicks-VPM
 ```
 
 ## 次回以降の更新
 
 SGimmicksPackageProjectを更新し、Semantic Versioningに従ってバージョンを上げて再実行します。`docs/index.json` は過去バージョンを残したまま新しいバージョンを追加します。
-
