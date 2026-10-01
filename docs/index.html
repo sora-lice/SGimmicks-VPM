@@ -133,7 +133,7 @@
   <a class="skip" href="#main">本文へ移動</a>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="SGimmicks トップ"><span class="mark">SG</span><span>SGimmicks</span><span class="version">v2.1.4</span></a>
+      <a class="brand" href="#top" aria-label="SGimmicks トップ"><span class="mark">SG</span><span>SGimmicks</span><span class="version">v2.1.5</span></a>
       <nav aria-label="メインナビゲーション"><ul><li><a href="#install">導入方法</a></li><li><a href="#gimmicks">ギミック一覧</a></li><li><a href="#requirements">動作環境</a></li><li><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a></li></ul></nav>
     </div>
   </header>
@@ -146,7 +146,7 @@
         <div class="actions"><a class="btn primary" href="#" data-add-repository><span>VCCに登録</span><span aria-hidden="true">↗</span></a><a class="btn secondary" href="#" data-add-repository><span>ALCOMに登録</span><span aria-hidden="true">↗</span></a></div>
         <p class="install-note">どちらも共通のVPM登録リンクを使用します。ブラウザの確認が表示されたら、使用するアプリを開いてください。</p>
         <div class="repo-bar" aria-label="リポジトリURL"><code id="repository-url">https://sora-lice.github.io/SGimmicks-VPM/index.json</code><button class="copy" type="button" id="copy-url">URLをコピー</button></div>
-        <div class="chips" aria-label="対応情報"><span class="chip">v2.1.4</span><span class="chip">PC / PCVR</span><span class="chip">Unity 2022.3</span><span class="chip">VRCSDK Worlds 3.10.x</span><span class="chip">UdonSharp</span></div>
+        <div class="chips" aria-label="対応情報"><span class="chip">v2.1.5</span><span class="chip">PC / PCVR</span><span class="chip">Unity 2022.3</span><span class="chip">VRCSDK Worlds 3.10.x</span><span class="chip">UdonSharp</span></div>
       </div>
     </section>
     <section id="install">
@@ -173,7 +173,7 @@
           <article class="feature" style="--tone:#f6e066"><div class="feature-top"><span class="feature-icon">CON</span><h3>コンサート照明</h3></div><p>DarknessVolume内を暗くしつつ、天井から演奏者とピアノへ円錐状のスポットライトを当てる演出を作成します。</p><div class="tags"><span class="tag">lilToon</span><span class="tag">PC Built-in</span><span class="tag">範囲暗転</span></div><details><summary>詳しい仕様</summary><ul><li>操作ボードはWorld Space UIで、レーザーポインターから操作できます。</li><li>円錐内のプレイヤーと指定オブジェクトを暗転から除外します。</li><li>対象マテリアルはlilToonのOpaque／Cutoutを想定しています。</li></ul></details></article>
           <article class="feature" style="--tone:#45d2ee"><div class="feature-top"><span class="feature-icon">TXT</span><h3>メッセージボード</h3></div><p>日本語対応の複数行テキストをプレビューし、確定すると複数の表示画面へ同じ文章・文字サイズ・効果音を反映します。</p><div class="tags"><span class="tag">最大100文字</span><span class="tag">複数表示</span><span class="tag">全員同期</span></div><details><summary>詳しい仕様</summary><ul><li>操作盤・入力欄・確定ボタン・表示パネルを自動生成します。</li><li>TextMeshPro UGUIの表示先を好きな数だけ登録できます。</li><li>最新の文章は後から入室したプレイヤーにも同期されます。</li></ul></details></article>
           <article class="feature" style="--tone:#f29dff"><div class="feature-top"><span class="feature-icon">TMR</span><h3>キャストタイマー</h3></div><p>キャストが登録すると左手首タイマーを表示でき、スタッフ側から共通タイマーの開始・一時停止・ベル送信を操作できます。</p><div class="tags"><span class="tag">VR手首表示</span><span class="tag">共通タイマー</span><span class="tag">ベル</span></div><details><summary>詳しい仕様</summary><ul><li>左トリガーのダブルタップで手首表示を切り替えます。</li><li>キャスト登録は各プレイヤーのローカル状態のため人数上限がありません。</li><li>00:00時とスタッフ操作時に登録キャストだけへベルを鳴らします。</li></ul></details></article>
-          <article class="feature" style="--tone:#ff6b6b"><div class="feature-top"><span class="feature-icon">OUT</span><h3>囁き声判定</h3></div><p>観客を固定座席へ着席させ、個別の声量閾値を超えた本人の視界だけにOUTを表示します。キャストは判定対象から除外できます。</p><div class="tags"><span class="tag">固定観客席</span><span class="tag">個別閾値</span><span class="tag">ローカルOUT</span></div><details><summary>詳しい仕様</summary><ul><li>Station AnimatorのVoice値を使い、初期設定では0.25秒の継続超過を判定します。</li><li>スタッフ操作盤から座席ごとの閾値変更、SAFE／OUT確認、OUT解除ができます。</li><li>登録キャストは普通に発声でき、判定座席の近くを自由に移動しても誤判定されません。</li><li>観客は着席中だけ目線高が統一され、退席時に元へ戻ります。</li></ul></details></article>
+          <article class="feature" style="--tone:#ff6b6b"><div class="feature-top"><span class="feature-icon">OUT</span><h3>囁き声判定</h3></div><p>観客を固定座席へ着席させ、個別の声量閾値を超えた本人の視界だけにOUTを表示します。キャストは判定対象から除外できます。</p><div class="tags"><span class="tag">固定観客席</span><span class="tag">個別閾値</span><span class="tag">ローカルOUT</span></div><details><summary>詳しい仕様</summary><ul><li>Station AnimatorのVoice値を使い、初期設定では0.08秒の継続超過を判定します。Unityの設定画面で調整できます。</li><li>スタッフ操作盤から座席ごとの閾値変更、SAFE／OUT確認、OUT解除ができます。</li><li>登録キャストは普通に発声でき、判定座席の近くを自由に移動しても誤判定されません。</li><li>観客は着席中だけ目線高が統一され、退席時に元へ戻ります。</li></ul></details></article>
         </div>
       </div>
     </section>
@@ -190,7 +190,7 @@
       <div class="wrap"><div class="update"><div><span class="eyebrow">VPM Update</span><h2>再インポートなしで更新</h2><p>リポジトリを一度登録すると、VCC／ALCOMのパッケージ管理画面から新しいバージョンを確認・適用できます。プロジェクトごとに導入バージョンを管理できます。</p></div><a class="btn primary" href="#" data-add-repository>今すぐ登録する <span aria-hidden="true">↗</span></a></div></div>
     </section>
   </main>
-  <footer><div class="wrap footer-row"><span>SGimmicks v2.1.4 — VRChat World Toolkit</span><div class="footer-links"><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a><a href="https://sora-lice.github.io/SGimmicks-VPM/index.json">index.json</a><a href="https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.1.4.zip">Package ZIP</a></div></div></footer>
+  <footer><div class="wrap footer-row"><span>SGimmicks v2.1.5 — VRChat World Toolkit</span><div class="footer-links"><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a><a href="https://sora-lice.github.io/SGimmicks-VPM/index.json">index.json</a><a href="https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.1.5.zip">Package ZIP</a></div></div></footer>
   <div class="toast" id="toast" role="status" aria-live="polite">リポジトリURLをコピーしました</div>
   <script>
     (() => {
