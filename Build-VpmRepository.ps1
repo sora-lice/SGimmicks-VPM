@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "2.1.6",
+    [string]$Version = "2.1.7",
     [string]$GitHubOwner = "YOUR_GITHUB_NAME",
     [string]$RepositoryName = "SGimmicks-VPM",
     [switch]$SiteOnly
