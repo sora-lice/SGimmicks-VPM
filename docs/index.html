@@ -133,7 +133,7 @@
   <a class="skip" href="#main">本文へ移動</a>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="SGimmicks トップ"><span class="mark">SG</span><span>SGimmicks</span><span class="version">v2.1.7</span></a>
+      <a class="brand" href="#top" aria-label="SGimmicks トップ"><span class="mark">SG</span><span>SGimmicks</span><span class="version">v2.1.8</span></a>
       <nav aria-label="メインナビゲーション"><ul><li><a href="#install">導入方法</a></li><li><a href="#gimmicks">ギミック一覧</a></li><li><a href="#requirements">動作環境</a></li><li><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a></li></ul></nav>
     </div>
   </header>
@@ -146,7 +146,7 @@
         <div class="actions"><a class="btn primary" href="#" data-add-repository><span>VCCに登録</span><span aria-hidden="true">↗</span></a><a class="btn secondary" href="#" data-add-repository><span>ALCOMに登録</span><span aria-hidden="true">↗</span></a></div>
         <p class="install-note">どちらも共通のVPM登録リンクを使用します。ブラウザの確認が表示されたら、使用するアプリを開いてください。</p>
         <div class="repo-bar" aria-label="リポジトリURL"><code id="repository-url">https://sora-lice.github.io/SGimmicks-VPM/index.json</code><button class="copy" type="button" id="copy-url">URLをコピー</button></div>
-        <div class="chips" aria-label="対応情報"><span class="chip">v2.1.7</span><span class="chip">PC / PCVR</span><span class="chip">Unity 2022.3</span><span class="chip">VRCSDK Worlds 3.10.x</span><span class="chip">UdonSharp</span></div>
+        <div class="chips" aria-label="対応情報"><span class="chip">v2.1.8</span><span class="chip">PC / PCVR</span><span class="chip">Unity 2022.3</span><span class="chip">VRCSDK Worlds 3.10.x</span><span class="chip">UdonSharp</span></div>
       </div>
     </section>
     <section id="install">
@@ -168,7 +168,7 @@
           <article class="feature" style="--tone:#65a9ff"><div class="feature-top"><span class="feature-icon">CAM</span><h3>監視カメラ</h3></div><p>複数カメラを監視室風モニターへ整列表示。パン・チルト・ズーム操作と、指定カメラのローカル拡大表示に対応します。</p><div class="tags"><span class="tag">複数カメラ</span><span class="tag">PTZ操作</span><span class="tag">音声選択</span></div><details><summary>詳しい仕様</summary><ul><li>通常表示は負荷軽減のためカメラを順番に更新し、選択中カメラは優先描画します。</li><li>参加者一覧から選んだ声は距離設定をローカル変更して聞き取りやすくします。生の音声を転送する方式ではありません。</li><li>カメラ追加後は更新処理を実行して、RenderTextureと表示枠を再構成します。</li></ul></details></article>
           <article class="feature" style="--tone:#a78bfa"><div class="feature-top"><span class="feature-icon">№</span><h3>部屋番号 / RTab</h3></div><p>4桁の部屋番号を入力してEで確定すると対応地点へテレポート。番号によるオブジェクト表示・非表示も設定できます。</p><div class="tags"><span class="tag">4桁入力</span><span class="tag">RTab連携</span><span class="tag">表示同期</span></div><details><summary>詳しい仕様</summary><ul><li>Cで入力を消去し、1台のタブレットを利用者ごとに切り替えて使えます。</li><li>テレポートはローカル、オブジェクトの表示状態はインスタンス全体へ同期します。</li><li>RTab本体は別途導入が必要です。</li></ul></details></article>
           <article class="feature" style="--tone:#ff8aa5"><div class="feature-top"><span class="feature-icon">FTP</span><h3>強制テレポート</h3></div><p>ワールド内のプレイヤーを複数選択し、1人ずつ別の移動先を割り当てて同時にテレポートできます。</p><div class="tags"><span class="tag">複数選択</span><span class="tag">個別行先</span><span class="tag">ぼかし演出</span></div><details><summary>詳しい仕様</summary><ul><li>共通サーバー時刻を基準に実行命令を同期します。</li><li>移動対象の各クライアントが自分自身を指定地点へ移動します。</li><li>テレポート後の視界を徐々にクリアにする演出を任意で有効化できます。</li></ul></details></article>
-          <article class="feature" style="--tone:#57d18a"><div class="feature-top"><span class="feature-icon">INT</span><h3>PCVR内線</h3></div><p>参加ボタンで内線グループへ入り、右トリガーを素早く2回押した後、押している間だけ全参加者へ通話します。</p><div class="tags"><span class="tag">PCVR専用</span><span class="tag">全参加者通話</span></div><details><summary>詳しい仕様</summary><ul><li>VRChatのプレイヤー音声距離をローカル調整する擬似内線です。</li><li>内線中は周囲向け音声を抑え、参加者同士を距離に関係なく聞き取りやすくします。</li></ul></details></article>
+          <article class="feature" style="--tone:#57d18a"><div class="feature-top"><span class="feature-icon">INT</span><h3>PCVR内線</h3></div><p>参加ボタンで内線グループへ入り、右トリガーを素早く2回押し、2回目を長押ししている間だけ全参加者へ通話します。</p><div class="tags"><span class="tag">PCVR専用</span><span class="tag">全参加者通話</span><span class="tag">本人専用の手首表示</span></div><details><summary>詳しい仕様</summary><ul><li>VRChatのプレイヤー音声距離をローカル調整する擬似内線です。</li><li>内線中は周囲向け音声を抑え、参加者同士を距離に関係なく聞き取りやすくします。</li><li>送話中だけ右手首に「内線中…」を本人専用で表示します。離すと終了し、次も2回押しが必要です。</li><li>退出や参加枠の再利用時も変更前の音声距離へ復元します。旧版の内線は設定画面から作成／更新してシーンを保存・再アップロードしてください。</li></ul></details></article>
           <article class="feature" style="--tone:#ffb45c"><div class="feature-top"><span class="feature-icon">LGT</span><h3>館内照明</h3></div><p>スタッフルームの操作盤から、登録したRealtime／Mixedライトを音付きで徐々に暗転・復帰し、状態を全員へ同期します。</p><div class="tags"><span class="tag">グローバル同期</span><span class="tag">フェード</span><span class="tag">効果音</span></div><details><summary>詳しい仕様</summary><ul><li>Bakedライトの焼き込み結果そのものは実行中に変更できません。</li><li>動的に暗くする対象にはRealtimeまたはMixedライトを使用します。</li></ul></details></article>
           <article class="feature" style="--tone:#f6e066"><div class="feature-top"><span class="feature-icon">CON</span><h3>コンサート照明</h3></div><p>DarknessVolume内を暗くしつつ、天井から演奏者とピアノへ円錐状のスポットライトを当てる演出を作成します。</p><div class="tags"><span class="tag">lilToon</span><span class="tag">PC Built-in</span><span class="tag">範囲暗転</span></div><details><summary>詳しい仕様</summary><ul><li>操作ボードはWorld Space UIで、レーザーポインターから操作できます。</li><li>円錐内のプレイヤーと指定オブジェクトを暗転から除外します。</li><li>対象マテリアルはlilToonのOpaque／Cutoutを想定しています。</li></ul></details></article>
           <article class="feature" style="--tone:#45d2ee"><div class="feature-top"><span class="feature-icon">TXT</span><h3>メッセージボード</h3></div><p>日本語対応の複数行テキストをプレビューし、確定すると複数の表示画面へ同じ文章・文字サイズ・効果音を反映します。</p><div class="tags"><span class="tag">最大100文字</span><span class="tag">複数表示</span><span class="tag">全員同期</span></div><details><summary>詳しい仕様</summary><ul><li>操作盤・入力欄・確定ボタン・表示パネルを自動生成します。</li><li>TextMeshPro UGUIの表示先を好きな数だけ登録できます。</li><li>最新の文章は後から入室したプレイヤーにも同期されます。</li></ul></details></article>
@@ -191,7 +191,7 @@
       <div class="wrap"><div class="update"><div><span class="eyebrow">VPM Update</span><h2>再インポートなしで更新</h2><p>リポジトリを一度登録すると、VCC／ALCOMのパッケージ管理画面から新しいバージョンを確認・適用できます。プロジェクトごとに導入バージョンを管理できます。</p></div><a class="btn primary" href="#" data-add-repository>今すぐ登録する <span aria-hidden="true">↗</span></a></div></div>
     </section>
   </main>
-  <footer><div class="wrap footer-row"><span>SGimmicks v2.1.7 — VRChat World Toolkit</span><div class="footer-links"><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a><a href="https://sora-lice.github.io/SGimmicks-VPM/index.json">index.json</a><a href="https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.1.7.zip">Package ZIP</a></div></div></footer>
+  <footer><div class="wrap footer-row"><span>SGimmicks v2.1.8 — VRChat World Toolkit</span><div class="footer-links"><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a><a href="https://sora-lice.github.io/SGimmicks-VPM/index.json">index.json</a><a href="https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.1.8.zip">Package ZIP</a></div></div></footer>
   <div class="toast" id="toast" role="status" aria-live="polite">リポジトリURLをコピーしました</div>
   <script>
     (() => {
