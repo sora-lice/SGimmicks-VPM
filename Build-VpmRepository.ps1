@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "2.1.8",
+    [string]$Version = "2.2.0",
     [string]$GitHubOwner = "YOUR_GITHUB_NAME",
     [string]$RepositoryName = "SGimmicks-VPM",
     [switch]$SiteOnly
@@ -88,7 +88,7 @@ $manifest = [ordered]@{
     displayName = "SGimmicks"
     version = $Version
     unity = "2022.3"
-    description = "PC向けVRChatワールド用ギミック集。テレポート、VIPスポーン、監視カメラ、部屋番号/RTab、強制テレポート、内線、照明、メッセージボード、キャストタイマー、囁き声判定を収録。"
+    description = "PC向けVRChatワールド用ギミック集。テレポート、監視カメラ、内線、照明、メッセージボード、囁き声判定、透過画像立体化、VIZVIDシネマなどを収録。"
     url = $packageUrl
     vpmDependencies = [ordered]@{
         "com.vrchat.worlds" = "3.10.x"
