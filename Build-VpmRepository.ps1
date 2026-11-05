@@ -2,7 +2,9 @@ param(
     [string]$Version = "2.4.0",
     [string]$GitHubOwner = "YOUR_GITHUB_NAME",
     [string]$RepositoryName = "SGimmicks-VPM",
-    [switch]$SiteOnly
+    [switch]$SiteOnly,
+    [switch]$PackageOnly,
+    [string]$PackageOutputDirectory = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -13,6 +15,10 @@ $packageId = "com.ysasa.sgimmicks"
 $packageRoot = Join-Path $repositoryRoot "source\$packageId"
 $docsRoot = Join-Path $repositoryRoot "docs"
 $releaseRoot = Join-Path $docsRoot "packages"
+if ($PackageOutputDirectory) {
+    if (-not $PackageOnly) { throw "PackageOutputDirectoryはPackageOnlyと併用してください。" }
+    $releaseRoot = [IO.Path]::GetFullPath($PackageOutputDirectory)
+}
 $templateRoot = Join-Path $repositoryRoot "templates"
 $baseUrl = "https://$GitHubOwner.github.io/$RepositoryName"
 $packageUrl = "$baseUrl/packages/$packageId-$Version.zip"
@@ -27,6 +33,7 @@ function Write-RepositorySite {
 }
 
 if ($SiteOnly) {
+    if ($PackageOnly) { throw "SiteOnlyとPackageOnlyは併用できません。" }
     Write-RepositorySite
     Write-Host "Repository website: $baseUrl/"
     exit 0
@@ -36,9 +43,19 @@ if (-not (Test-Path -LiteralPath $sourceProject)) {
     throw "SGimmicksPackageProjectが見つかりません: $sourceProject"
 }
 
-if (Test-Path -LiteralPath $packageRoot) {
-    Remove-Item -LiteralPath $packageRoot -Recurse -Force
+function Remove-PackageOutput([string]$Target) {
+    $fullTarget = [IO.Path]::GetFullPath($Target)
+    $fullPackage = [IO.Path]::GetFullPath($packageRoot)
+    $expectedPackage = [IO.Path]::GetFullPath((Join-Path $repositoryRoot "source\com.ysasa.sgimmicks"))
+    if ($fullPackage -ne $expectedPackage -or ($fullTarget -ne $fullPackage -and -not $fullTarget.StartsWith($fullPackage + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase))) {
+        throw "パッケージ作業領域の外は削除できません: $fullTarget"
+    }
+    if (Test-Path -LiteralPath $fullTarget) {
+        if ((Get-Item -LiteralPath $fullTarget).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw "リンク先は削除できません: $fullTarget" }
+        Remove-Item -LiteralPath $fullTarget -Recurse -Force
+    }
 }
+Remove-PackageOutput $packageRoot
 New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
 New-Item -ItemType Directory -Path $releaseRoot -Force | Out-Null
 
@@ -50,27 +67,61 @@ Copy-Item -LiteralPath (Join-Path $sourceProject "Assets\CastTimerGimmick.meta")
 $serializedRoot = Join-Path $packageRoot "SerializedUdonPrograms"
 New-Item -ItemType Directory -Path $serializedRoot -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $sourceProject "Assets\SerializedUdonPrograms.meta") -Destination $packageRoot
-$castTimerPrograms = @(
-    "240acd391966f3d4c8efcf3aabbbf842.asset",
-    "93050332db0d28a4a82be47a9d88944c.asset",
-    "dafaae08dca2c044ba4cd26d0cd2c2d3.asset"
-)
-foreach ($assetName in $castTimerPrograms) {
-    Copy-Item -LiteralPath (Join-Path $sourceProject "Assets\SerializedUdonPrograms\$assetName") -Destination $serializedRoot
-    Copy-Item -LiteralPath (Join-Path $sourceProject "Assets\SerializedUdonPrograms\$assetName.meta") -Destination $serializedRoot
+# Assets直下へ生成されたプログラムも全て収集する。受付などの追加時に固定リストの更新漏れでMissingにしない。
+$externalPrograms = @{}
+Get-ChildItem -LiteralPath (Join-Path $sourceProject "Assets\SerializedUdonPrograms") -Filter '*.asset.meta' | ForEach-Object {
+    $match = [regex]::Match((Get-Content -LiteralPath $_.FullName -Raw), '(?m)^guid: ([a-f0-9]{32})')
+    if ($match.Success) { $externalPrograms[$match.Groups[1].Value] = $_.FullName }
+}
+$serializedReferences = [Collections.Generic.HashSet[string]]::new()
+$legacyProgramFiles = [ordered]@{}
+foreach ($sourceFolder in @('SGimmicks', 'CastTimerGimmick')) {
+    Get-ChildItem -LiteralPath (Join-Path $sourceProject ("Assets\" + $sourceFolder)) -Filter '*.asset' -Recurse | ForEach-Object {
+        $match = [regex]::Match((Get-Content -LiteralPath $_.FullName -Raw), 'serializedUdonProgramAsset:.*guid: ([a-f0-9]{32})')
+        if ($match.Success -and $serializedReferences.Add($match.Groups[1].Value)) {
+            $serializedGuid = $match.Groups[1].Value
+            if ($externalPrograms.ContainsKey($serializedGuid)) {
+                $metaPath = $externalPrograms[$serializedGuid]
+                $assetPath = $metaPath.Substring(0, $metaPath.Length - 5)
+                Copy-Item -LiteralPath $assetPath -Destination $serializedRoot
+                Copy-Item -LiteralPath $metaPath -Destination $serializedRoot
+                $legacyProgramFiles['Assets\SerializedUdonPrograms\' + [IO.Path]::GetFileName($assetPath)] = $serializedGuid
+            }
+        }
+    }
 }
 
 # unitypackage専用ビルダーはVPM利用時には不要で、Packages配下へ書き込もうとするため除外する。
 $legacyBuilders = @(
     (Join-Path $packageRoot "SGimmicks\Editor\SGPackageBuilder.cs"),
     (Join-Path $packageRoot "SGimmicks\Editor\SGPackageBuilder.cs.meta"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionBuildChecks.cs"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionBuildChecks.cs.meta"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionValidationBuilder.cs"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionValidationBuilder.cs.meta"),
+    (Join-Path $packageRoot "SGimmicks\Scenes\ReceptionValidation.unity"),
+    (Join-Path $packageRoot "SGimmicks\Scenes\ReceptionValidation.unity.meta"),
     (Join-Path $packageRoot "CastTimerGimmick\Editor") ,
     (Join-Path $packageRoot "CastTimerGimmick\Editor.meta")
 )
 foreach ($legacyBuilder in $legacyBuilders) {
-    if (Test-Path -LiteralPath $legacyBuilder) {
-        Remove-Item -LiteralPath $legacyBuilder -Recurse -Force
-    }
+    Remove-PackageOutput $legacyBuilder
+}
+
+# 公開用は導入者自身の公開URLを設定する。個別の検証先を初期値として配布しない。
+$receptionWindow = Join-Path $packageRoot 'SGimmicks\Editor\SGReceptionWindow.cs'
+if (Test-Path -LiteralPath $receptionWindow) {
+    $sourceText = Get-Content -LiteralPath $receptionWindow -Raw
+    $sourceText = [regex]::Replace($sourceText, 'private const string DefaultApi = "[^"]*";', 'private const string DefaultApi = "";')
+    [IO.File]::WriteAllText($receptionWindow, $sourceText, [Text.UTF8Encoding]::new($false))
+}
+$packagedGuids = [Collections.Generic.HashSet[string]]::new()
+Get-ChildItem -LiteralPath $packageRoot -Filter '*.meta' -Recurse | ForEach-Object {
+    $match = [regex]::Match((Get-Content -LiteralPath $_.FullName -Raw), '(?m)^guid: ([a-f0-9]{32})')
+    if ($match.Success) { [void]$packagedGuids.Add($match.Groups[1].Value) }
+}
+foreach ($serializedGuid in $serializedReferences) {
+    if (-not $packagedGuids.Contains($serializedGuid)) { throw "Serialized Udon Programが不足しています: $serializedGuid" }
 }
 
 # RuntimeをUdonSharpアセンブリとして明示登録し、Editorは通常のEditor asmdefへ分離する。
@@ -88,7 +139,7 @@ $manifest = [ordered]@{
     displayName = "SGimmicks"
     version = $Version
     unity = "2022.3"
-    description = "PC向けVRChatワールド用ギミック集。テレポート、監視カメラ、内線、照明、お題表示、囁き声判定、透過画像立体化、VIZVIDシネマ、ローカル自動ドア、RTab注文・物体転送などを収録。"
+    description = "PC向けVRChatワールド用ギミック集。カード受付・来店管理、テレポート、監視カメラ、内線、照明、お題表示、囁き声判定、透過画像立体化、VIZVIDシネマ、ローカル自動ドア、RTab注文・物体転送などを収録。"
     url = $packageUrl
     vpmDependencies = [ordered]@{
         "com.vrchat.worlds" = "3.10.x"
@@ -102,11 +153,7 @@ $manifest = [ordered]@{
         "Assets\SGimmicks" = "4266535577e7c06439e201b5910eba59"
         "Assets\CastTimerGimmick" = "b78e7576d609426409f7786d6e3ecab6"
     }
-    legacyFiles = [ordered]@{
-        "Assets\SerializedUdonPrograms\240acd391966f3d4c8efcf3aabbbf842.asset" = "7922c4f787df3814db6aa440c1f40714"
-        "Assets\SerializedUdonPrograms\93050332db0d28a4a82be47a9d88944c.asset" = "16cd99473ce622943a22364e2b4abfc8"
-        "Assets\SerializedUdonPrograms\dafaae08dca2c044ba4cd26d0cd2c2d3.asset" = "c1dc1a81b997a9c449cf14af048e32d0"
-    }
+    legacyFiles = $legacyProgramFiles
 }
 $manifest | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $packageRoot "package.json") -Encoding UTF8
 Copy-Item -LiteralPath (Join-Path $templateRoot "package.json.meta") -Destination $packageRoot
@@ -122,6 +169,13 @@ foreach ($key in $manifest.Keys) {
     $listingManifest[$key] = $manifest[$key]
 }
 $listingManifest["zipSHA256"] = $hash
+
+if ($PackageOnly) {
+    Write-Host "Local VPM package: $zipPath"
+    Write-Host "SHA256: $hash"
+    Write-Host "Repository listing and website were not changed."
+    exit 0
+}
 
 $indexPath = Join-Path $docsRoot "index.json"
 if (Test-Path -LiteralPath $indexPath) {

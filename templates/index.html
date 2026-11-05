@@ -163,6 +163,16 @@
       <div class="wrap">
         <div class="section-head"><span class="kicker">Included gimmicks</span><h2>収録ギミック</h2><p>各カードを開くと、同期範囲や操作方法などの補足を確認できます。</p></div>
         <div class="feature-grid">
+          <article class="feature" id="reception" style="--tone:#8ee5c0">
+            <div class="feature-top"><span class="feature-icon">受付</span><h3>カード受付・来店管理</h3></div>
+            <p>ワールド内でカードをかざすと、来店をGoogleスプレッドシートに記録します。スタッフはRTabで予約を確認し、共有メモを更新できます。</p>
+            <div class="tags"><span class="tag">本人だけに表示</span><span class="tag">24時間ごとに加算</span><span class="tag">Windows補助ツール</span></div>
+            <details><summary>導入方法と連携セット</summary><ul>
+              <li>Unityの「SGimmicks → カード受付・来店管理」で、受付カードと読取機、本人用画面を作成できます。</li>
+              <li>連携セットの導入手順に沿ってGoogle台帳を設定し、運営担当者1名のPCで補助ツールを起動します。</li>
+              <li>スタッフ画面を使う場合は、UnityにRTabを導入して受付アプリを追加します。</li>
+            </ul><p><a href="packages/SGReception-Support-2.5.0.zip">受付連携セットをダウンロード</a></p></details>
+          </article>
           <article class="feature" style="--tone:#4ae0c4"><div class="feature-top"><span class="feature-icon">TP</span><h3>テレポート</h3></div><p>指定オブジェクトをUseすると、操作したプレイヤー本人を登録地点へ移動します。入口と移動先をHierarchyから設定できます。</p><div class="tags"><span class="tag">ローカル動作</span><span class="tag">位置・向き</span></div><details><summary>詳しい仕様</summary><ul><li>移動先Transformの位置と向きを使用します。</li><li>操作した本人だけが移動します。</li></ul></details></article>
           <article class="feature" style="--tone:#ffd37a"><div class="feature-top"><span class="feature-icon">VIP</span><h3>VIPスポーン</h3></div><p>登録した表示名のプレイヤーだけをVIP地点へ初期スポーンさせ、その他のプレイヤーは通常スポーンを使用します。</p><div class="tags"><span class="tag">複数名</span><span class="tag">Respawn対応</span></div><details><summary>詳しい仕様</summary><ul><li>VRChatの表示名を完全一致・大文字小文字区別で判定します。</li><li>対象者はRespawn実行時もVIP地点へ移動します。</li></ul></details></article>
           <article class="feature" style="--tone:#65a9ff"><div class="feature-top"><span class="feature-icon">CAM</span><h3>監視カメラ</h3></div><p>複数カメラを監視室風モニターへ整列表示。パン・チルト・ズーム操作と、指定カメラのローカル拡大表示に対応します。</p><div class="tags"><span class="tag">複数カメラ</span><span class="tag">PTZ操作</span><span class="tag">音声選択</span></div><details><summary>詳しい仕様</summary><ul><li>通常表示は負荷軽減のためカメラを順番に更新し、選択中カメラは優先描画します。</li><li>参加者一覧から選んだ声は距離設定をローカル変更して聞き取りやすくします。生の音声を転送する方式ではありません。</li><li>カメラ追加後は更新処理を実行して、RenderTextureと表示枠を再構成します。</li></ul></details></article>

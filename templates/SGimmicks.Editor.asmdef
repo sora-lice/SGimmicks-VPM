@@ -10,6 +10,7 @@
     "VRC.SDK3",
     "VRC.SDK3.Editor",
     "VRC.Udon",
+    "VRC.Udon.Serialization.OdinSerializer",
     "VRC.Udon.Editor",
     "Unity.TextMeshPro",
     "Unity.TextMeshPro.Editor",
