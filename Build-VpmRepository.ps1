@@ -99,6 +99,8 @@ $legacyBuilders = @(
     (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionBuildChecks.cs.meta"),
     (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionValidationBuilder.cs"),
     (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionValidationBuilder.cs.meta"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGFixedInstancePortalBuildChecks.cs"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGFixedInstancePortalBuildChecks.cs.meta"),
     (Join-Path $packageRoot "SGimmicks\Scenes\ReceptionValidation.unity"),
     (Join-Path $packageRoot "SGimmicks\Scenes\ReceptionValidation.unity.meta"),
     (Join-Path $packageRoot "CastTimerGimmick\Editor") ,
@@ -139,7 +141,7 @@ $manifest = [ordered]@{
     displayName = "SGimmicks"
     version = $Version
     unity = "2022.3"
-    description = "PC向けVRChatワールド用ギミック集。カード受付・来店管理、テレポート、監視カメラ、内線、照明、お題表示、囁き声判定、透過画像立体化、VIZVIDシネマ、ローカル自動ドア、RTab注文・物体転送などを収録。"
+    description = "PC向けVRChatワールド用ギミック集。固定インスタンスポータル（検証用）、カード受付・来店管理、テレポート、監視カメラ、内線、照明、お題表示、囁き声判定、透過画像立体化、VIZVIDシネマ、ローカル自動ドア、RTab注文・物体転送などを収録。"
     url = $packageUrl
     vpmDependencies = [ordered]@{
         "com.vrchat.worlds" = "3.10.x"

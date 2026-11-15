@@ -163,6 +163,18 @@
       <div class="wrap">
         <div class="section-head"><span class="kicker">Included gimmicks</span><h2>収録ギミック</h2><p>各カードを開くと、同期範囲や操作方法などの補足を確認できます。</p></div>
         <div class="feature-grid">
+          <article class="feature" id="fixed-instance-portal" style="--tone:#ffd37a">
+            <div class="feature-top"><span class="feature-icon">PORT</span><h3>固定インスタンスポータル（検証用）</h3></div>
+            <p>長い参加URLから行き先を取り込み、非アクティブのSDKポータルを複製して有効化します。</p>
+            <div class="tags"><span class="tag">2.6.0追加</span><span class="tag">入室時にローカル生成</span><span class="tag">実機検証が必要</span></div>
+            <details><summary>導入方法と検証条件</summary><ul>
+              <li>SGimmicks → 固定インスタンスポータル（検証用）を開き、長い参加URLまたは完全なRoom IDを入力して作成します。</li>
+              <li>SDKプレハブの非アクティブなテンプレートを自動生成します。本体を移動して配置し、テンプレートは非アクティブのままにしてください。</li>
+              <li>RefreshPortalのOFF/ONを比較できます。設定更新で手動配置は維持します。行き先変更には再ビルドが必要です。</li>
+              <li>既存Inviteへの合流は保証されていません。オーナー以外と後から入った人でも到着先IDを確認し、Publicや別インスタンスへの移動は失敗として扱ってください。</li>
+              <li>参加URLはワールドデータに保存されます。入口ワールドの参加者へ共有してよい行き先を設定してください。</li>
+            </ul></details>
+          </article>
           <article class="feature" id="reception" style="--tone:#8ee5c0">
             <div class="feature-top"><span class="feature-icon">受付</span><h3>カード受付・来店管理</h3></div>
             <p>ワールド内でカードをかざすと、来店をGoogleスプレッドシートに記録します。スタッフはRTabで予約を確認し、共有メモを更新できます。</p>
