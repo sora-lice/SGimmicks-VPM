@@ -101,6 +101,8 @@ $legacyBuilders = @(
     (Join-Path $packageRoot "SGimmicks\Editor\SGReceptionValidationBuilder.cs.meta"),
     (Join-Path $packageRoot "SGimmicks\Editor\SGFixedInstancePortalBuildChecks.cs"),
     (Join-Path $packageRoot "SGimmicks\Editor\SGFixedInstancePortalBuildChecks.cs.meta"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGBakedPortalBuildChecks.cs"),
+    (Join-Path $packageRoot "SGimmicks\Editor\SGBakedPortalBuildChecks.cs.meta"),
     (Join-Path $packageRoot "SGimmicks\Scenes\ReceptionValidation.unity"),
     (Join-Path $packageRoot "SGimmicks\Scenes\ReceptionValidation.unity.meta"),
     (Join-Path $packageRoot "CastTimerGimmick\Editor") ,

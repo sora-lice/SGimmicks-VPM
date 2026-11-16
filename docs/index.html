@@ -133,7 +133,7 @@
   <a class="skip" href="#main">本文へ移動</a>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="SGimmicks トップ"><span class="mark">SG</span><span>SGimmicks</span><span class="version">v2.6.0</span></a>
+      <a class="brand" href="#top" aria-label="SGimmicks トップ"><span class="mark">SG</span><span>SGimmicks</span><span class="version">v2.6.1</span></a>
       <nav aria-label="メインナビゲーション"><ul><li><a href="#install">導入方法</a></li><li><a href="#gimmicks">ギミック一覧</a></li><li><a href="#requirements">動作環境</a></li><li><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a></li></ul></nav>
     </div>
   </header>
@@ -146,7 +146,7 @@
         <div class="actions"><a class="btn primary" href="#" data-add-repository><span>VCCに登録</span><span aria-hidden="true">↗</span></a><a class="btn secondary" href="#" data-add-repository><span>ALCOMに登録</span><span aria-hidden="true">↗</span></a></div>
         <p class="install-note">どちらも共通のVPM登録リンクを使用します。ブラウザの確認が表示されたら、使用するアプリを開いてください。</p>
         <div class="repo-bar" aria-label="リポジトリURL"><code id="repository-url">https://sora-lice.github.io/SGimmicks-VPM/index.json</code><button class="copy" type="button" id="copy-url">URLをコピー</button></div>
-        <div class="chips" aria-label="対応情報"><span class="chip">v2.6.0</span><span class="chip">PC / PCVR</span><span class="chip">Unity 2022.3</span><span class="chip">VRCSDK Worlds 3.10.x</span><span class="chip">UdonSharp</span></div>
+        <div class="chips" aria-label="対応情報"><span class="chip">v2.6.1</span><span class="chip">PC / PCVR</span><span class="chip">Unity 2022.3</span><span class="chip">VRCSDK Worlds 3.10.x</span><span class="chip">UdonSharp</span></div>
       </div>
     </section>
     <section id="install">
@@ -168,6 +168,7 @@
             <p>長い参加URLから行き先を取り込む検証機能です。2.6.0の利用者試験では、指定した既存Inviteとは別のインスタンスへ移動しました。固定移動の成功は確認できていません。</p>
             <div class="tags"><span class="tag">2.6.0追加</span><span class="tag">検証用</span><span class="tag">既存インスタンスへの固定未達</span></div>
             <details><summary>導入方法と検証条件</summary><ul>
+              <li>2.6.1で「SGimmicks → ポータル直接配置テスト」を追加。ワールドIDのみのAと完全locationのBを置いた新規の検証ワールドを作成し、実行時処理のない初期値保存方式を比較できます。直接配置方式での固定成功は未確認です。</li>
               <li>SGimmicks → 固定インスタンスポータル（検証用）を開き、長い参加URLまたは完全なRoom IDを入力して作成します。</li>
               <li>SDKプレハブの非アクティブなテンプレートを自動生成します。本体を移動して配置し、テンプレートは非アクティブのままにしてください。</li>
               <li>RefreshPortalのOFF/ONを比較できます。設定更新で手動配置は維持します。行き先変更には再ビルドが必要です。</li>
@@ -216,7 +217,7 @@
       <div class="wrap"><div class="update"><div><span class="eyebrow">VPM Update</span><h2>再インポートなしで更新</h2><p>リポジトリを一度登録すると、VCC／ALCOMのパッケージ管理画面から新しいバージョンを確認・適用できます。プロジェクトごとに導入バージョンを管理できます。</p></div><a class="btn primary" href="#" data-add-repository>今すぐ登録する <span aria-hidden="true">↗</span></a></div></div>
     </section>
   </main>
-  <footer><div class="wrap footer-row"><span>SGimmicks v2.6.0 — VRChat World Toolkit</span><div class="footer-links"><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a><a href="https://sora-lice.github.io/SGimmicks-VPM/index.json">index.json</a><a href="https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.6.0.zip">Package ZIP</a></div></div></footer>
+  <footer><div class="wrap footer-row"><span>SGimmicks v2.6.1 — VRChat World Toolkit</span><div class="footer-links"><a href="https://github.com/sora-lice/SGimmicks-VPM">GitHub</a><a href="https://sora-lice.github.io/SGimmicks-VPM/index.json">index.json</a><a href="https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.6.1.zip">Package ZIP</a></div></div></footer>
   <div class="toast" id="toast" role="status" aria-live="polite">リポジトリURLをコピーしました</div>
   <script>
     (() => {

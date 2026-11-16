@@ -405,6 +405,37 @@
             "Assets\\SerializedUdonPrograms\\dafaae08dca2c044ba4cd26d0cd2c2d3.asset": "c1dc1a81b997a9c449cf14af048e32d0"
           },
           "zipSHA256": "01485E8D121CED29EA5F21A78318C1D9219043F573E12F8A98EA736F5463E66E"
+        },
+        "2.6.1": {
+          "name": "com.ysasa.sgimmicks",
+          "displayName": "SGimmicks",
+          "version": "2.6.1",
+          "unity": "2022.3",
+          "description": "PC向けVRChatワールド用ギミック集。固定インスタンスポータル（検証用）、カード受付・来店管理、テレポート、監視カメラ、内線、照明、お題表示、囁き声判定、透過画像立体化、VIZVIDシネマ、ローカル自動ドア、RTab注文・物体転送などを収録。",
+          "url": "https://sora-lice.github.io/SGimmicks-VPM/packages/com.ysasa.sgimmicks-2.6.1.zip",
+          "vpmDependencies": {
+            "com.vrchat.worlds": "3.10.x"
+          },
+          "author": {
+            "name": "ysasa",
+            "email": "ysasa@users.noreply.github.com",
+            "url": "https://github.com/sora-lice"
+          },
+          "legacyFolders": {
+            "Assets\\SGimmicks": "4266535577e7c06439e201b5910eba59",
+            "Assets\\CastTimerGimmick": "b78e7576d609426409f7786d6e3ecab6"
+          },
+          "legacyFiles": {
+            "Assets\\SerializedUdonPrograms\\17a551081508d5342bda4098abd72902.asset": "e78f5a11018d80d4884f4705d9c1892a",
+            "Assets\\SerializedUdonPrograms\\77eb51c81e5884b42b78e78e60d6cebb.asset": "921580a186db0544eb650c424abbf138",
+            "Assets\\SerializedUdonPrograms\\8e4c61d820f752c4fa6f23e475e4c2c2.asset": "9a003438b88c8cd46819e24c992381df",
+            "Assets\\SerializedUdonPrograms\\311657fefe9e5bc4096ef9be343f4ba2.asset": "3e2bd050806f61245b6f889db5617b0e",
+            "Assets\\SerializedUdonPrograms\\fd4e43e3f88fbd041b13727fba747b96.asset": "e037613dae32a8b47b05e632a622122d",
+            "Assets\\SerializedUdonPrograms\\240acd391966f3d4c8efcf3aabbbf842.asset": "7922c4f787df3814db6aa440c1f40714",
+            "Assets\\SerializedUdonPrograms\\93050332db0d28a4a82be47a9d88944c.asset": "16cd99473ce622943a22364e2b4abfc8",
+            "Assets\\SerializedUdonPrograms\\dafaae08dca2c044ba4cd26d0cd2c2d3.asset": "c1dc1a81b997a9c449cf14af048e32d0"
+          },
+          "zipSHA256": "FDF07475C5AC69705A37497CB7266FF90E9491DF46498784880B187890685316"
         }
       }
     }
